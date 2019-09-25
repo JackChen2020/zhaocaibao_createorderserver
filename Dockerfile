@@ -9,6 +9,7 @@ RUN apk add --no-cache tzdata build-base libffi-dev openssl-dev python-dev py-pi
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 
+
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt \
     && mkdir -p /project/sso/logs \
