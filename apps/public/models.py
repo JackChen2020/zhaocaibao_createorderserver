@@ -80,6 +80,31 @@ class QrCodeLinkPayType(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'qrcodelinkpaytype'
 
+
+class TbDFPool(models.Model):
+    id = models.BigAutoField(primary_key=True)
+
+    ordercode = models.CharField(max_length=120,verbose_name='代付订单号')
+
+    status = models.CharField(max_length=1, verbose_name="状态,0-启用，1-不启用,2-失效,3-删除,4-已使用")
+
+    url = models.CharField(max_length=255, verbose_name="支付链接", default="")
+
+    amount = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="金额")
+
+    createtime = models.BigIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        t=time.mktime(timezone.now().timetuple())
+        if not self.createtime:
+            self.createtime = t
+        return super(TbDFPool, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '淘宝代付链接池表'
+        verbose_name_plural = verbose_name
+        db_table = 'tbdfpool'
+
 class Qrcode(models.Model):
 
     id=models.BigAutoField(primary_key=True)

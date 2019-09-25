@@ -12,6 +12,8 @@ class Order(models.Model):
     paypass = models.IntegerField(verbose_name="支付渠道",default=0)
     paypassname = models.CharField(verbose_name="支付渠道名称",default="",max_length=60)
 
+    tbdforder = models.CharField(verbose_name='淘宝代付订单号',default='',max_length=60)
+
     paytype = models.IntegerField(verbose_name="支付方式",default=0)
     paytypename = models.CharField(verbose_name="支付方式名称",default="",max_length=60)
 
