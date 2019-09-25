@@ -114,7 +114,7 @@ class CreateOrder(object):
 
             base_url = "alipays://platformapi/startapp?appId=20000067&url="
 
-            data=[]
+            data={}
 
             data['url'] = base_url + tbdfpool[0].url
 
