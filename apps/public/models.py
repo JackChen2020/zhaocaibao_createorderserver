@@ -90,6 +90,8 @@ class TbDFPool(models.Model):
 
     url = models.CharField(max_length=255, verbose_name="支付链接", default="")
 
+    qrcode = models.CharField(max_length=255, verbose_name="二维码链接", default="")
+
     amount = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="金额")
 
     createtime = models.BigIntegerField(default=0)
