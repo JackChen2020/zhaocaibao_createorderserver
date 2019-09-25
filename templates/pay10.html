@@ -214,7 +214,7 @@
     // var money = '500.00';
     // var back_url = 'http://allwin6666.com/pay/#/juli';
     // var start_timestamp = parseInt('1569334433');
-    var qr_code = '{{data.qrcode}}';
+    var qr_code = '{{data.pay_url}}';
     // var timestamp = parseInt(new Date().getTime() / 1000);
 
 
@@ -358,7 +358,7 @@
                 }, false);
             } else {
                 $('#app').show();
-                var url = "alipays://platformapi/startapp?appId=60000029&showLoading=YES&url=" + encodeURIComponent(host_url + '{{data.url}}');
+                var url = "alipays://platformapi/startapp?appId=60000029&showLoading=YES&url=" + encodeURIComponent( '{{data.url}}');
                 $('#alipay_url').attr('href', url);
                 window.location.href = url;
             }
