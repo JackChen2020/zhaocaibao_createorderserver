@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/css/base_all_code.css">
+    <link rel="stylesheet" href="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/layer_mobile/layer.css">
+    <script>
+        let html = document.documentElement;
+        let w = html.clientWidth;
+        if (w > 800) {
+            w = 800;
+        }
+        let fontSize = w / 375 * 100;
+        if (window.screen.orientation && (window.screen.orientation.angle === 90 || window.screen.orientation.angle === -90)) {
+            fontSize = w / 667 * 100;
+        }
+        html.style.fontSize = fontSize + 'px';
+    </script>
+    <style>
+        /*微信引导*/
+        .wx_guide {
+            width: 90%;
+            margin: 0 auto;
+            position: absolute;
+            text-align: center;
+            z-index: 1000;
+            top: 30%;
+            left: 10%;
+            box-sizing: border-box;
+        }
+
+        .myArrow {
+            position: absolute;
+            top: -145%;
+            right: 18px;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .wx_guide div {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .title_id {
+            display: block;
+            width: 0.5rem;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            text-align: center;
+            background: orange;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 0.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .wx_guide p {
+            font-size: 0.3rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .wx_guide p span {
+            display: block;
+            padding: 0.1rem;
+            background: -webkit-linear-gradient(top, #2F4056, #000);
+            background: linear-gradient(top, #2F4056, #000);
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+            margin: 0 0.2rem;
+            font-size: 0.25rem;
+        }
+
+        .wx_guide p i {
+            margin: 0 0.1rem;
+            font-size: 0.25rem;
+        }
+        /*微信引导end*/
+
+        .btn-block {
+            display: block;
+            width: 80%;
+        }
+
+        .btn-primary {
+            color: #fff !important;
+            background-color: #007bff !important;
+            border-color: #007bff !important;
+        }
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            color: #212529;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            font-size: 16px;
+            line-height: 40px;
+            border-radius: 10px;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        a {
+            color: #007bff !important;
+            text-decoration: none;
+            background-color: transparent;
+        }
+        *, :after, :before {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<div id="app" style="display: none">
+    <div class="wx_guide" style="display: none">
+        <i class="iconfont icon-cs-jt-xs-1-1 myArrow"></i>
+        <div>
+            <span class="title_id">1</span>
+            <p>点击右上角的<span><i class="iconfont icon-gengduo"></i></span>按钮</p>
+        </div>
+        <div>
+            <span class="title_id">2</span>
+            <p>选择<span><i class="iconfont icon-anzhuoduanliulanqidakai"></i>在浏览器打开</span></p>
+        </div>
+    </div>
+    <div class="container">
+        <header>
+            <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/ali_logo.jpg" alt=""
+                 class="alipay_logo">
+        </header>
+        <div class="code_cont">
+            <div class="important_tips">
+                若无法唤起支付宝，请截屏【扫码】
+            </div>
+            <h1>订单金额：<span>{{data.amount}}</span> 元</h1>
+            <p class="order_num">订单号：<span id="num">{{data.ordercode}}</span>
+                <button id="copyBtn" data-clipboard-target="#num" data-clipboard-action="copy">复制</button>
+            </p>
+
+            <img id="pay_img" src="" alt="">
+            <div style="text-align: center;">
+                <a class="btn-primary btn btn-block" href="" id="alipay_url">启动支付宝</a>
+            </div>
+            <!--        <p class="order_num" style="padding: 0.06rem;color: red;">温馨提示：如遇微信支付不了，请用支付宝支付！</p>-->
+
+<!--            <div class="countDown">-->
+<!--                <div><span class="remaining_m">&#45;&#45;</span>分</div>-->
+<!--                <div><span class="remaining_s">&#45;&#45;</span>秒</div>-->
+<!--            </div>-->
+            <div class="guide">
+                <div>
+                    <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_pic.jpg" alt="">
+                    <p>截屏将二维码<br>保存至本地相册</p>
+                </div>
+                <div>
+                    <div class="logo_type">
+                        <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_ali.jpg" alt=""
+                             class="alipay_logo" style="width: 0.18rem;">
+                    </div>
+                    <p>打开支付宝，选择扫一扫</p>
+                </div>
+                <div>
+                    <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_scan.jpg" alt="">
+                    <p>从本地相册选择<br>选取截屏二维码</p>
+                </div>
+                <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_arrow.jpg" alt=""
+                     class="arrow1">
+                <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_arrow.jpg" alt=""
+                     class="arrow2">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/jquery.min.js"></script>
+<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/clipboard.min.js"></script>
+<!--<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/phone.js"></script>-->
+<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/layer_mobile/layer.js"></script>
+<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/public.js"></script>
+<script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
+<script>
+    $(function () {
+        //剪切板
+        var clipboard = new ClipboardJS("#copyBtn");
+        //复制成功的回调
+        clipboard.on("success", function (element) {
+            layer.open({
+                content: '复制成功'
+                , skin: 'msg'
+                , time: 1
+            });
+        });
+        //复制失败的回调
+        clipboard.on("error", function (element) {
+            layer.open({
+                content: element
+                , btn: '确定'
+            });
+        });
+    });
+    var host_url = window.location.protocol + '//' + window.location.hostname;
+    // var business_number = '20190924221353e7G0ki';
+    // var money = '500.00';
+    // var back_url = 'http://allwin6666.com/pay/#/juli';
+    // var start_timestamp = parseInt('1569334433');
+    var qr_code = '{{data.qrcode}}';
+    // var timestamp = parseInt(new Date().getTime() / 1000);
+
+
+    // var time = start_timestamp + 300 - timestamp;
+    // countDown(time, function (m, s) {
+    //     $('.remaining_m').text(m);
+    //     $('.remaining_s').text(s);
+    // });
+    $('#pay_img').attr('src', 'http://47.56.193.188/nginx_upload/qrcode/321.png');
+    $('#alipay_url').attr('href', alipay_url)
+    //订单检测
+    // payStatusChecker(business_number, back_url);
+    var browser = {
+        version: function () {
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {         //移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                weChat: !!u.match(/MicroMessenger/i),
+                QQBrowserLite: !!u.match(/qqbrowserlite\/[\w\.]+/i),
+                QQBrowser: !!u.match(/m?qqbrowser[\/\s]?[\w\.]+/i),
+                QQ: !!u.match(/qq\/[\d\.]+/i),
+                Alipay: !!u.match(/Alipay/i)
+            };
+        }(),
+        language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    };
+    if (browser.version.mobile) {
+        if (browser.version.weChat || browser.version.QQ) {
+            $('#app').show();
+            $('.wx_guide').show();
+            $('.container').hide();
+
+            function loadStyle(url) {
+                var link = document.createElement('link');
+                link.type = 'text/css';
+                link.rel = 'stylesheet';
+                link.href = url;
+                var head = document.getElementsByTagName('head')[0];
+                head.appendChild(link);
+            }
+
+            loadStyle('http://at.alicdn.com/t/font_1285349_kxk4sfp84fb.css');
+            html.style.fontSize = 48 + 'px';
+            document.body.style.backgroundColor = '#009fe8';
+        } else {
+            history.pushState(null, null, window.location.href);
+            //获取判断用的对象
+            if (browser.version.Alipay) {
+                //在支付宝中打开
+                $('.guide').hide();
+                var tip = '<div>' +
+                    '<p>如果您的支付过程中</p>' +
+                    '<p>提示交易中断、支付异常等问题</p>' +
+                    '<p>先点击取消</p>' +
+                    '<p>再次点击慷慨付款即可！！！</p>' +
+                    '</div>';
+                $('.important_tips').html(tip);
+                $('#pay_img').css('visibility', 'hidden');
+                $('#alipay_url').text('立即付款');
+                $('#alipay_url').bind('click', function () {
+                    goPayByUrl();
+                    return false;
+                });
+                $('#app').show();
+
+                var payOrderNo = "";
+
+                var payUrl = "";
+                var times = 0;
+
+                function queryOrder() {
+                    payUrl = qr_code;//通过支付链接解析出支付宝订单号，直接发起付款
+                    payOrderNo = payUrl.substr(payUrl.indexOf("biz_no=") + "biz_no=".length, "2019081304200302001000000000".length)
+                    payUrl = payUrl.replace("https://qr.alipay.com/_d?_b=peerpay&enableWK=YES&", "https://mclient.alipay.com/h5/peerpay.htm?");
+                }
+
+                window.onload = function () {
+                    queryOrder();
+                }
+
+                function goPayByUrl() {
+                    var message = "亲，页面即将跳转，稍后请点击“慷慨付款”";
+                    ap.alert({
+                        title: "支付提示",
+                        content: message,
+                        buttonText: '我知道了'
+                    }, function () {
+                        ap.pushWindow(payUrl);
+                        window.setTimeout(function () {
+                            AlipayJSBridge.call('toast', {
+                                content: '亲，现在请点击“慷慨付款”完成付款！！！',
+                                duration: 6000
+                            }, function () {
+                            })
+                        }, 2000);
+                    });
+                }
+
+                //导航栏颜色
+                AlipayJSBridge.call("setTitleColor", {
+                    color: parseInt('098EE9', 16),
+                    reset: false // (可选,默认为false)  是否重置title颜色为默认颜色。
+                });
+                //导航栏loadin
+                AlipayJSBridge.call('showTitleLoading');
+                //副标题文字
+                AlipayJSBridge.call('setTitle', {
+                    title: '自助充值',
+                    subtitle: '淘宝代付模式，请放心付款'
+                });
+                //右上角菜单
+                AlipayJSBridge.call('setOptionMenu', {
+                    icontype: 'filter',
+                    redDot: '01', // -1表示不显示，0表示显示红点，1-99表示在红点上显示的数字
+                });
+                AlipayJSBridge.call('showOptionMenu');
+                document.addEventListener('optionMenu', function (e) {
+                    AlipayJSBridge.call('showPopMenu', {
+                        menus: [{
+                            name: "查看帮助",
+                            tag: "tag1",
+                            redDot: "1"
+                        },
+                            {
+                                name: "联系客服",
+                                tag: "tag2",
+                            }
+                        ],
+                    }, function (e) {
+                        console.log(e);
+                    });
+                }, false);
+            } else {
+                $('#app').show();
+                var url = "alipays://platformapi/startapp?appId=60000029&showLoading=YES&url=" + encodeURIComponent(host_url + '{{data.url}}');
+                $('#alipay_url').attr('href', url);
+                window.location.href = url;
+            }
+        }
+
+    } else {
+        $('#app').show();
+    }
+</script>
+</body>
+</html>

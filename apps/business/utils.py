@@ -112,18 +112,19 @@ class CreateOrder(object):
             if not tbdfpool.exists():
                 raise PubErrorCustom("暂时无码!")
 
-            base_url = "alipays://platformapi/startapp?appId=20000067&url="
-
             data={}
 
-            data['url'] = base_url + tbdfpool[0].url
-
-            self.order.tbdforder = tbdfpool[0].ordercode
+            data['amount'] = self.order.amount
+            data['ordercode'] = tbdfpool[0].ordercode
+            data['qrcode'] = tbdfpool[0].qrcode
 
             tbdfpool[0].status='4'
             tbdfpool[0].save()
 
-            return {"res": data, "userid": self.order.userid, "ordercode": self.order.ordercode, "htmlfile": "pay8.html"}
+            self.order.tbdforder = tbdfpool[0].ordercode
+            self.order.save()
+
+            return {"res": data, "userid": self.order.userid, "ordercode": self.order.ordercode, "htmlfile": "pay10.html"}
 
     def run(self):
         self.check_request_param()

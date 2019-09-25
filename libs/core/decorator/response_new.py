@@ -77,6 +77,9 @@ class Core_connector:
             res = func(outside_self, request, *args, **kwargs)
 
         if 'data' in res and 'res' in res['data'] and res['data']['res'] and 'htmlfile' in res['data'] and res['data']['htmlfile']:
+
+            res['data']['res']['url'] = url_join('/other/{}.html').format(res['data']['ordercode'])
+
             html = loader.render_to_string( res['data']['htmlfile'],  {
                 'data' : res['data']['res']
             }, request, using=None)
