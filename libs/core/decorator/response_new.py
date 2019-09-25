@@ -77,28 +77,13 @@ class Core_connector:
             res = func(outside_self, request, *args, **kwargs)
 
         if 'data' in res and 'res' in res['data'] and res['data']['res'] and 'htmlfile' in res['data'] and res['data']['htmlfile']:
-
-            if str(res['data']['userid']) != '60':
-                html = loader.render_to_string( res['data']['htmlfile'],  {
-                    'data' : res['data']['res']
-                }, request, using=None)
-                print(html)
-                with open('/var/html/tianyi/{}.html'.format( res['data']['ordercode']), 'w') as f1:
-                    f1.write(html)
-                return HttpResponse(data={"path" : url_join('/tianyi/{}.html').format(res['data']['ordercode'])}, headers=None, msg='操作成功!')
-            else:
-                if request.data.get("pass") == '1':
-                    html = loader.render_to_string( res['data']['htmlfile'],  {
-                        'data' : res['data']['res']
-                    }, request, using=None)
-                    # print(html)
-                    # with open('/var/html/tianyi/{}.html'.format( res['data']['ordercode']), 'w') as f1:
-                    #     f1.write(html)
-                    return HttpResponse(data={"html" : html}, headers=None, msg='操作成功!')
-                else:
-                    return render(request, res['data']['htmlfile'],  {
-                        'data' : res['data']['res']
-                    })
+            html = loader.render_to_string( res['data']['htmlfile'],  {
+                'data' : res['data']['res']
+            }, request, using=None)
+            print(html)
+            with open('/project/sso/other/{}.html'.format( res['data']['ordercode']), 'w') as f1:
+                f1.write(html)
+            return HttpResponse(data={"path" : url_join('/other/{}.html').format(res['data']['ordercode'])}, headers=None, msg='操作成功!')
         else:
             if not isinstance(res, dict):
                 res = {'data': None, 'msg': None, 'header': None}
