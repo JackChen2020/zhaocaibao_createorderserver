@@ -13,6 +13,7 @@ RUN pip install --upgrade pip \
     && pip install -r requirements.txt \
     && mkdir -p /project/sso/logs \
     && mkdir -p /project/sso/media \
+    && mkdir -p /project/sso/other \
     && mkdir -p /var/logs/uwsgi/ \
     && mkdir -p /var/logs/sso \
     && echo "" > /var/logs/uwsgi/run.log \
