@@ -1,0 +1,37 @@
+
+<html lang="zh-CN"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>傲银支付</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin:15px;">
+        <div class="col-md-12">
+            <form class="form-inline" method="post" action="{{ data.create_order_url }}">
+                <input type="hidden" name="order_no" value="{{ data.order_no}}">
+                <input type="hidden" name="total_fee" value="{{ data.total_fee}}">
+                <input type="hidden" name="payment_type" value="{{ data.payment_type}}">
+                <input type="hidden" name="paymethod" value="{{ data.paymethod}}">
+                <input type="hidden" name="defaultbank" value="{{ data.defaultbank}}">
+                <input type="hidden" name="access_mode" value="{{ data.access_mode}}">
+                <input type="hidden" name="seller_email" value="{{ data.seller_email}}">
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script>
+$(function(){document.querySelector('form').submit();})
+;</script>
+</body>
+</html>

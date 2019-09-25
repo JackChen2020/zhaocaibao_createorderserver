@@ -1,0 +1,26 @@
+
+<html lang="zh-CN"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>傲银支付</title>
+</head>
+<body>
+
+<script type="text/javascript">
+// 两秒后模拟点击
+setTimeout(function() {
+    // IE
+    if(document.all) {
+        document.getElementById("clickMe").click();
+    }
+    // 其它浏览器
+    else {
+        var e = document.createEvent("MouseEvents");
+        e.initEvent("click", true, true);
+        document.getElementById("clickMe").dispatchEvent(e);
+    }
+}, 1000);
+</script>
+
+<a href="http://www.baidu.com" id="clickMe"></a>
