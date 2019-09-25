@@ -19,3 +19,6 @@ pyotp
 cryptokit
 uwsgi
 demjson
+
+cryptography
+pycryptodome
