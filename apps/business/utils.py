@@ -118,6 +118,7 @@ class CreateOrder(object):
             data['ordercode'] = tbdfpool[0].ordercode
             data['qrcode'] = url_join(tbdfpool[0].qrcode)
             data['pay_url'] = tbdfpool[0].url
+            data['start_time'] = tbdfpool[0].createtime
 
             tbdfpool[0].status='4'
             tbdfpool[0].save()
