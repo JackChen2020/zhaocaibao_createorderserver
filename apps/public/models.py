@@ -85,16 +85,15 @@ class TbDFPool(models.Model):
     id = models.BigAutoField(primary_key=True)
 
     ordercode = models.CharField(max_length=120,verbose_name='代付订单号')
-
-    status = models.CharField(max_length=1, verbose_name="状态,0-启用，1-不启用,2-失效,3-删除,4-已使用")
-
+    status = models.CharField(max_length=1, verbose_name="状态,0-启用，1-不启用,2-失效,3-禁用,4-删除,5-退出")
     url = models.CharField(max_length=255, verbose_name="支付链接", default="")
-
     qrcode = models.CharField(max_length=255, verbose_name="二维码链接", default="")
-
     amount = models.DecimalField(max_digits=18,decimal_places=6,default=0.000,verbose_name="金额")
-
+    userid = models.BigIntegerField(default=0, verbose_name="码商")
+    updtime = models.BigIntegerField(default=0)
     createtime = models.BigIntegerField(default=0)
+
+    statusname = None
 
     def save(self, *args, **kwargs):
         t=time.mktime(timezone.now().timetuple())
