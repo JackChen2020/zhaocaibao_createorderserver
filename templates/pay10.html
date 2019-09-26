@@ -214,7 +214,7 @@
     // var money = '500.00';
     // var back_url = 'http://allwin6666.com/pay/#/juli';
     var start_timestamp = parseInt('{{ data.start_time }}');
-    var qr_code = '{{data.pay_url}}';
+    var qr_code = '{{data.pay_url|safe}}';
     var timestamp = parseInt(new Date().getTime() / 1000);
 
 
