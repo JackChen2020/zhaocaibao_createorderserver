@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/css/base_all_code.css">
-    <link rel="stylesheet" href="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/layer_mobile/layer.css">
+    <link rel="stylesheet" href="{{data.host_url}}/static/css/base_all_code.css">
+    <link rel="stylesheet" href="{{data.host_url}}/static/css/layer.css">
     <script>
         let html = document.documentElement;
         let w = html.clientWidth;
@@ -137,7 +137,7 @@
     </div>
     <div class="container">
         <header>
-            <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/ali_logo.jpg" alt=""
+            <img src="{{data.host_url}}/static/images/ali_logo.jpg" alt=""
                  class="alipay_logo">
         </header>
         <div class="code_cont">
@@ -161,33 +161,33 @@
             </div>
             <div class="guide">
                 <div>
-                    <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_pic.jpg" alt="">
+                    <img src="{{data.host_url}}/static/images/guide_pic.jpg" alt="">
                     <p>截屏将二维码<br>保存至本地相册</p>
                 </div>
                 <div>
                     <div class="logo_type">
-                        <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_ali.jpg" alt=""
+                        <img src="{{data.host_url}}/static/images/guide_ali.jpg" alt=""
                              class="alipay_logo" style="width: 0.18rem;">
                     </div>
                     <p>打开支付宝，选择扫一扫</p>
                 </div>
                 <div>
-                    <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_scan.jpg" alt="">
+                    <img src="{{data.host_url}}/static/images/guide_scan.jpg" alt="">
                     <p>从本地相册选择<br>选取截屏二维码</p>
                 </div>
-                <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_arrow.jpg" alt=""
+                <img src="{{data.host_url}}/images/guide_arrow.jpg" alt=""
                      class="arrow1">
-                <img src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/images/guide_arrow.jpg" alt=""
+                <img src="{{data.host_url}}/images/guide_arrow.jpg" alt=""
                      class="arrow2">
             </div>
         </div>
     </div>
 </div>
-<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/jquery.min.js"></script>
-<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/clipboard.min.js"></script>
+<script src="{{data.host_url}}/static/js/jquery.min.js"></script>
+<script src="{{data.host_url}}/static/js/clipboard.min.js"></script>
 <!--<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/phone.js"></script>-->
-<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/layer_mobile/layer.js"></script>
-<script src="https://xin-prod.oss-cn-shenzhen.aliyuncs.com/xin-pay/static/js/public.js"></script>
+<script src="{{data.host_url}}/static/js/layer.js"></script>
+<script src="{{data.host_url}}/static/js/public.js"></script>
 <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
 <script>
     $(function () {

@@ -8,6 +8,7 @@ from libs.utils.mytime import UtilTime
 from libs.utils.log import logger
 import random
 from django.db.models import Q
+from education.settings import ServerUrl
 
 class CreateOrder(object):
 
@@ -114,6 +115,7 @@ class CreateOrder(object):
             data['qrcode'] = url_join(tbdfpoolObj.qrcode)
             data['pay_url'] = tbdfpoolObj.url
             data['start_time'] = self.order.createtime
+            data['host_url'] = ServerUrl
 
             self.order.tbdforder = tbdfpoolObj.ordercode
             self.order.qr_id = tbdfpoolObj.id
