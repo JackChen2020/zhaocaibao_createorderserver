@@ -215,15 +215,15 @@
     // var back_url = 'http://allwin6666.com/pay/#/juli';
     // var start_timestamp = parseInt('1569334433');
     var qr_code = '{{data.pay_url}}';
-    // var timestamp = parseInt(new Date().getTime() / 1000);
+    var timestamp = parseInt(new Date().getTime() / 1000);
 
 
-    // var time = start_timestamp + 300 - timestamp;
-    // countDown(time, function (m, s) {
-    //     $('.remaining_m').text(m);
-    //     $('.remaining_s').text(s);
-    // });
-    $('#pay_img').attr('src', 'http://47.56.193.188/nginx_upload/qrcode/321.png');
+    var time = start_timestamp + 300 - timestamp;
+    countDown(time, function (m, s) {
+        $('.remaining_m').text(m);
+        $('.remaining_s').text(s);
+    });
+    $('#pay_img').attr('src', {{data.qrcode}});
     $('#alipay_url').attr('href', alipay_url)
     //订单检测
     // payStatusChecker(business_number, back_url);
