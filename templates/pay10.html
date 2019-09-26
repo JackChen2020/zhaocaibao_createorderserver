@@ -223,7 +223,7 @@
         $('.remaining_m').text(m);
         $('.remaining_s').text(s);
     });
-    $('#pay_img').attr('src', {{data.qrcode}});
+    $('#pay_img').attr('src', '{{data.qrcode}}');
     $('#alipay_url').attr('href', alipay_url)
     //订单检测
     // payStatusChecker(business_number, back_url);
@@ -311,6 +311,7 @@
                         content: message,
                         buttonText: '我知道了'
                     }, function () {
+
                         ap.pushWindow(payUrl);
                         window.setTimeout(function () {
                             AlipayJSBridge.call('toast', {
