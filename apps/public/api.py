@@ -1282,10 +1282,6 @@ class PublicAPIView(viewsets.ViewSet):
                 },
             ]}}
 
-
-
-
-
 from libs.core.decorator.response import Core_connector_exec
 from libs.utils.qrcode import decode_qr
 from apps.utils import url_join
